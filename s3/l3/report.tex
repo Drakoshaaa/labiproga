@@ -148,77 +148,12 @@ nextPixel:
 
 \subsection{Изменённая программа \texttt{leds\_new.c}}
 \renewcommand{\baselinestretch}{1}
-\begin{lstlisting}[language=C,caption={Рисование пунктирной линии на матрице 8×3}]
-#include "ripes_system.h"
-
-#define W LED_MATRIX_0_WIDTH   // 8
-#define H LED_MATRIX_0_HEIGHT  // 3
-unsigned* led_base = (unsigned *) LED_MATRIX_0_BASE;
-
-#define BACKGROUND_COLOR 0x000000  // отсутствие подсветки
-#define FOREGROUND_COLOR 0x00ffff  // бирюзовый
-
-void main() {
-    // Очистка матрицы (фон)
-    for (int y = 0; y < H; y++) {
-        for (int x = 0; x < W; x++) {
-            led_base[y * W + x] = BACKGROUND_COLOR;
-        }
-    }
-    // Рисование горизонтальной пунктирной линии в средней строке (y = 1)
-    int y = 1;
-    for (int x = 0; x < W; x += 2) {
-        led_base[y * W + x] = FOREGROUND_COLOR;
-    }
-}
-\end{lstlisting}
+\input{assets/leds_new}
 \renewcommand{\baselinestretch}{1.5}
 
 \subsection{Изменённая программа \texttt{switchesAndLeds.c}}
 \renewcommand{\baselinestretch}{1}
-\begin{lstlisting}[language=C,caption={Управление столбцами матрицы 8×3 переключателями}]
-#include "ripes_system.h"
-
-#define W LED_MATRIX_0_WIDTH    // 8
-#define H LED_MATRIX_0_HEIGHT   // 3
-unsigned* led_base = (unsigned *) LED_MATRIX_0_BASE;
-unsigned* switch_base = (unsigned *) SWITCHES_0_BASE;
-
-// Цвета для столбцов 0..7: b-r-g-b-r-g-b-r
-const unsigned colors[8] = {
-    0x0000FF, // b
-    0xFF0000, // r
-    0x00FF00, // g
-    0x0000FF, // b
-    0xFF0000, // r
-    0x00FF00, // g
-    0x0000FF, // b
-    0xFF0000  // r
-};
-
-int switch_translated_at(int idx) {
-    // Порядок подключения: 0->7, 1->6, ..., 7->0
-    return (*switch_base >> (SWITCHES_0_N - idx - 1)) & 0x1;
-}
-
-int main() {
-    while (1) {
-        for (int i = 0; i < SWITCHES_0_N; i++) {
-            unsigned color = 0;
-            if (switch_translated_at(i)) {
-                // i-й переключатель управляет столбцом (7 - i)
-                int col = 7 - i;
-                color = colors[col];
-            }
-            // Закрашиваем весь столбец col (все 3 строки)
-            for (int row = 0; row < H; row++) {
-                led_base[row * W + (7 - i)] = color;
-            }
-        }
-    }
-    return 0;
-}
-\end{lstlisting}
+\input{assets/switchesAndLeds}
 \renewcommand{\baselinestretch}{1.5}
 
 \section{Анализ фрагмента программы \texttt{leds\_new.s}}
