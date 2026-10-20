@@ -158,57 +158,30 @@ nextPixel:
 
 \section{Анализ фрагмента программы \texttt{leds\_new.s}}
 
-\begin{table}[h!]
-\centering
-\caption{Назначение инструкций фрагмента \texttt{nextRow}--\texttt{nextPixel}}
-\begin{tabularx}{\textwidth}{|l|X|}
-\hline
+\begin{longtblr}{colspec={|l|X|}, hlines, vlines}
 \textbf{Инструкция} & \textbf{Назначение в контексте программы} \\
-\hline
 \texttt{mv a4, zero} & Обнуление счётчика пикселей в строке. \\
-\hline
 \texttt{slli a3, t1, 8} & \(a3 \leftarrow t1 \ll 8\) (умножение номера строки на 256). \\
-\hline
 \texttt{sub a3, a3, t1} & \(a3 \leftarrow a3 - t1 = t1 \cdot 255\). \\
-\hline
 \texttt{divu a3, a3, a2} & Деление на высоту матрицы (a2) для вычисления компоненты цвета. \\
-\hline
 \texttt{slli a3, a3, 8} & Сдвиг на 8 бит для размещения компоненты в нужной позиции. \\
-\hline
 \texttt{and t5, a3, a7} & Маскирование для выделения нужных битов цвета. \\
-\hline
 \texttt{mv a5, t2} & Загрузка текущего адреса LED-матрицы в a5. \\
-\hline
 \texttt{mv a3, a1} & Инициализация счётчика пикселей в строке (a1 — ширина). \\
-\hline
 \texttt{divu s0, a4, a1} & Вычисление номера строки для текущего пикселя (a4/a1). \\
-\hline
 \texttt{add s1, t4, a4} & Сложение для формирования байта цвета. \\
-\hline
 \texttt{divu s1, s1, t3} & Деление для получения компоненты синего цвета. \\
-\hline
 \texttt{slli s0, s0, 16} & Сдвиг красной компоненты в старшие 8 бит. \\
-\hline
 \texttt{and s0, s0, t0} & Маскирование красной компоненты. \\
-\hline
 \texttt{or s0, t5, s0} & Объединение с зелёной компонентой. \\
-\hline
 \texttt{andi s1, s1, 255} & Выделение младших 8 бит синей компоненты. \\
-\hline
 \texttt{or s0, s0, s1} & Формирование итогового 24-битного цвета. \\
-\hline
 \texttt{sw s0, 0(a5)} & Запись цвета в текущий пиксель LED-матрицы. \\
-\hline
 \texttt{addi a3, a3, -1} & Уменьшение счётчика пикселей. \\
-\hline
 \texttt{addi a5, a5, 4} & Переход к следующему пикселю (адрес + 4). \\
-\hline
 \texttt{addi a4, a4, 255} & Увеличение смещения для вычисления цвета. \\
-\hline
 \texttt{bnez a3, nextPixel} & Повтор цикла, пока не обработаны все пиксели строки. \\
-\hline
-\end{tabularx}
-\end{table}
+\end{longtblr}
 
 \section{Примеры запуска программ и снимки экрана}
 
