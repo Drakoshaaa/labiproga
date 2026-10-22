@@ -102,7 +102,7 @@
     \item Изучить симуляцию светодиодной матрицы с использованием программы на ассемблере \texttt{leds\_new.s}. Для фрагмента кода (метка начала \texttt{nextRow}, метка завершения \texttt{nextPixel}) сформулировать результаты анализа в табличной форме (2 столбца: инструкция + назначение).
     \item Симуляция светодиодной матрицы с использованием программы на C \texttt{leds\_new.c}. Изменить код в соответствии с вариантом:
     \begin{itemize}
-        \item размер матрицы: 8×3 (ширина × высота);
+        \item размер матрицы: 7×5 ;
         \item отображаемая фигура: бирюзовая горизонтальная пунктирная линия;
         \item фон: отсутствие подсветки (чёрный).
     \end{itemize}
@@ -156,6 +156,8 @@ nextPixel:
 \input{assets/switchesAndLeds}
 \renewcommand{\baselinestretch}{1.5}
 
+\newpage
+
 \section{Анализ фрагмента программы \texttt{leds\_new.s}}
 
 \begin{longtblr}{colspec={|l|X|}, hlines, vlines}
@@ -189,7 +191,7 @@ nextPixel:
 
 Для выполнения работы в Ripes были созданы необходимые периферийные устройства:
 \begin{itemize}
-    \item для программы \texttt{leds\_new.s} — LED Matrix с параметрами Height=5, Width=5, увеличенный LED Size;
+    \item для программы \texttt{leds\_new.s} — LED Matrix с параметрами Height=5, Width=7, увеличенный LED Size;
     \item для программы \texttt{leds\_new.c} — LED Matrix с параметрами Height=3, Width=8;
     \item для программы \texttt{switchesAndLeds.c} — LED Matrix (Height=3, Width=8) и Switches (8 переключателей).
 \end{itemize}
@@ -198,37 +200,30 @@ nextPixel:
 
 \subsection{Скриншоты}
 
-\textbf{Работа программы \texttt{leds\_new.s} (матрица 5×5):}
 
-\vspace{2cm}
 \begin{center}
-\fbox{\parbox{0.8\textwidth}{\centering [Место для скриншота: работа \texttt{leds\_new.s}, пошаговое выполнение фрагмента \texttt{nextRow}--\texttt{nextPixel}]}}
+    \includegraphics[width=0.4\textwidth]{assets/Pasted image.png}
+
+    \textbf{Работа программы \texttt{leds\_new.s} (матрица 5×7):}
 \end{center}
-\vspace{2cm}
 
-\textbf{Работа изменённой программы \texttt{leds\_new.c} (матрица 8×3, пунктирная линия):}
-
-\vspace{2cm}
 \begin{center}
-\fbox{\parbox{0.8\textwidth}{\centering [Место для скриншота: матрица 8×3 с бирюзовой горизонтальной пунктирной линией]}}
+    \includegraphics[width=0.4\textwidth]{assets/Pasted image (3).png}
+
+    \textbf{Работа изменённой программы \texttt{switchesAndLeds.c} (матрица 8×3, переключатели выключены):}
 \end{center}
-\vspace{2cm}
 
-\textbf{Работа изменённой программы \texttt{switchesAndLeds.c} (матрица 8×3, переключатели выключены):}
-
-\vspace{2cm}
 \begin{center}
-\fbox{\parbox{0.8\textwidth}{\centering [Место для скриншота: все переключатели выключены, матрица погашена]}}
+    \includegraphics[width=0.4\textwidth]{assets/Pasted image (2).png}
+
+    \textbf{Работа изменённой программы \texttt{switchesAndLeds.c} (все переключатели включены):}
 \end{center}
-\vspace{2cm}
 
-\textbf{Работа изменённой программы \texttt{switchesAndLeds.c} (все переключатели включены):}
-
-\vspace{2cm}
 \begin{center}
-\fbox{\parbox{0.8\textwidth}{\centering [Место для скриншота: все переключатели включены, столбцы матрицы окрашены в цвета b-r-g-b-r-g-b-r с учётом обратного порядка подключения]}}
+    \includegraphics[width=0.4\textwidth]{assets/Pasted image (4).png}
+    
+    \textbf{Работа изменённой программы \texttt{switchesAndLeds.c} (часть переключателей включена включены):}
 \end{center}
-\vspace{2cm}
 
 \section{Выводы}
 
